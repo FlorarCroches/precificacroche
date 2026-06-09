@@ -204,21 +204,16 @@ function calcular() {
 let nomePeca = document.getElementById("nomePeca").value.trim();
 
 let insumos = parseFloat(document.getElementById("insumos").value);
-
 let quantidadeLinhas = parseFloat(document.getElementById("quantidadeLinhas").value);
-
 let valorRolo = parseFloat(document.getElementById("valorRolo").value);
-
 let horas = parseFloat(document.getElementById("horas").value);
-
 let valorHora = parseFloat(document.getElementById("valorHora").value);
-
 let lucro = parseFloat(document.getElementById("lucro").value);
-
 let atacado = parseFloat(document.getElementById("atacado").value);
 
 document.getElementById("erro").innerHTML = "";
 
+// validação
 if (
 nomePeca === "" ||
 isNaN(insumos) ||
@@ -228,12 +223,9 @@ isNaN(horas) ||
 isNaN(valorHora) ||
 isNaN(lucro)
 ) {
-
 document.getElementById("erro").innerHTML =
 "⚠️ Preencha todos os campos obrigatórios.";
-
 return;
-
 }
 
 if (
@@ -244,80 +236,44 @@ horas < 0 ||
 valorHora < 0 ||
 lucro < 0
 ) {
-
 document.getElementById("erro").innerHTML =
 "⚠️ Os valores devem ser maiores que zero.";
-
 return;
-
 }
 
 if (isNaN(atacado)) {
 atacado = 0;
 }
 
+// cálculos
 let custoLinhas = quantidadeLinhas * valorRolo;
-
 let maoDeObra = horas * valorHora;
 
-let custoTotal =
-insumos +
-custoLinhas +
-maoDeObra;
+let custoTotal = insumos + custoLinhas + maoDeObra;
 
-let valorLucro =
-custoTotal * (lucro / 100);
+let valorLucro = custoTotal * (lucro / 100);
 
-let precoFinal =
-custoTotal + valorLucro;
+let precoFinal = custoTotal + valorLucro;
 
-let precoAtacado =
-precoFinal -
-(precoFinal * (atacado / 100));
+let precoAtacado = precoFinal - (precoFinal * (atacado / 100));
 
 precoFinalGlobal = precoFinal;
 
+// mostrar resultado
 document.getElementById("resultado").style.display = "block";
 
 document.getElementById("resultado").innerHTML =
-
 "<h2>📊 Resultado Interno</h2>" +
-
-"<p><strong>Peça:</strong> " +
-nomePeca +
-"</p>" +
-
+"<p><strong>Peça:</strong> " + nomePeca + "</p>" +
 "<hr><br>" +
-
-"<p>💎 Insumos: € " +
-insumos.toFixed(2) +
-"</p>" +
-
-"<p>🧶 Linhas: € " +
-custoLinhas.toFixed(2) +
-"</p>" +
-
-"<p>⏰ Mão de obra: € " +
-maoDeObra.toFixed(2) +
-"</p>" +
-
-"<p>📦 Custo Total: € " +
-custoTotal.toFixed(2) +
-"</p>" +
-
-"<p>📈 Lucro: € " +
-valorLucro.toFixed(2) +
-"</p>" +
-
+"<p>💎 Insumos: € " + insumos.toFixed(2) + "</p>" +
+"<p>🧶 Linhas: € " + custoLinhas.toFixed(2) + "</p>" +
+"<p>⏰ Mão de obra: € " + maoDeObra.toFixed(2) + "</p>" +
+"<p>📦 Custo Total: € " + custoTotal.toFixed(2) + "</p>" +
+"<p>📈 Lucro: € " + valorLucro.toFixed(2) + "</p>" +
 "<br>" +
-
-"<h3>💰 Preço Varejo: € " +
-precoFinal.toFixed(2) +
-"</h3>" +
-
-"<h3>🏷️ Preço Atacado: € " +
-precoAtacado.toFixed(2) +
-"</h3>";
+"<h3>💰 Preço Varejo: € " + precoFinal.toFixed(2) + "</h3>" +
+"<h3>🏷️ Preço Atacado: € " + precoAtacado.toFixed(2) + "</h3>";
 
 }
 
@@ -339,37 +295,25 @@ return;
 function limparCampos() {
 
 document.getElementById("nomePeca").value = "";
-
 document.getElementById("descricao").value = "";
-
 document.getElementById("insumos").value = "";
-
 document.getElementById("quantidadeLinhas").value = "";
-
 document.getElementById("valorRolo").value = "";
-
 document.getElementById("horas").value = "";
-
 document.getElementById("valorHora").value = "";
-
 document.getElementById("lucro").value = "";
-
 document.getElementById("atacado").value = "";
 
 document.getElementById("resultado").innerHTML = "";
-
 document.getElementById("orcamento").innerHTML = "";
-
 document.getElementById("erro").innerHTML = "";
 
 document.getElementById("resultado").style.display = "none";
-
 document.getElementById("orcamento").style.display = "none";
 
 precoFinalGlobal = 0;
 
 }
-
 </script>
 
 </body>
