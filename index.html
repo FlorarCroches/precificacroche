@@ -202,7 +202,6 @@ let precoFinalGlobal = 0;
 function calcular() {
 
 let nomePeca = document.getElementById("nomePeca").value.trim();
-
 let insumos = parseFloat(document.getElementById("insumos").value);
 let quantidadeLinhas = parseFloat(document.getElementById("quantidadeLinhas").value);
 let valorRolo = parseFloat(document.getElementById("valorRolo").value);
@@ -241,40 +240,42 @@ document.getElementById("erro").innerHTML =
 return;
 }
 
-if (isNaN(atacado)) {
+if (atacado === "" || isNaN(atacado)) {
 atacado = 0;
 }
 
 // cálculos
 let custoLinhas = quantidadeLinhas * valorRolo;
 let maoDeObra = horas * valorHora;
-
 let custoTotal = insumos + custoLinhas + maoDeObra;
-
 let valorLucro = custoTotal * (lucro / 100);
-
 let precoFinal = custoTotal + valorLucro;
-
 let precoAtacado = precoFinal - (precoFinal * (atacado / 100));
 
 precoFinalGlobal = precoFinal;
 
-// mostrar resultado
-document.getElementById("resultado").style.display = "block";
+// 🔥 MOSTRAR LOGO ABAIXO DO BOTÃO
+const resultado = document.getElementById("resultado");
+resultado.style.display = "block";
 
-document.getElementById("resultado").innerHTML =
-"<h2>📊 Resultado Interno</h2>" +
-"<p><strong>Peça:</strong> " + nomePeca + "</p>" +
-"<hr><br>" +
-"<p>💎 Insumos: € " + insumos.toFixed(2) + "</p>" +
-"<p>🧶 Linhas: € " + custoLinhas.toFixed(2) + "</p>" +
-"<p>⏰ Mão de obra: € " + maoDeObra.toFixed(2) + "</p>" +
-"<p>📦 Custo Total: € " + custoTotal.toFixed(2) + "</p>" +
-"<p>📈 Lucro: € " + valorLucro.toFixed(2) + "</p>" +
-"<br>" +
-"<h3>💰 Preço Varejo: € " + precoFinal.toFixed(2) + "</h3>" +
-"<h3>🏷️ Preço Atacado: € " + precoAtacado.toFixed(2) + "</h3>";
+resultado.innerHTML = `
+<h2>📊 Resultado da Precificação</h2>
 
+<p><strong>Peça:</strong> ${nomePeca}</p>
+<hr>
+
+<p>💎 Insumos: € ${insumos.toFixed(2)}</p>
+<p>🧶 Linhas: € ${custoLinhas.toFixed(2)}</p>
+<p>⏰ Mão de obra: € ${maoDeObra.toFixed(2)}</p>
+
+<p><strong>Custo total:</strong> € ${custoTotal.toFixed(2)}</p>
+<p><strong>Lucro:</strong> € ${valorLucro.toFixed(2)}</p>
+
+<hr>
+
+<h3>💰 Preço final: € ${precoFinal.toFixed(2)}</h3>
+<h3>🏷️ Atacado: € ${precoAtacado.toFixed(2)}</h3>
+`;
 }
 
 function versaoFutura() {
@@ -304,13 +305,13 @@ document.getElementById("valorHora").value = "";
 document.getElementById("lucro").value = "";
 document.getElementById("atacado").value = "";
 
-document.getElementById("resultado").innerHTML = "";
-document.getElementById("orcamento").innerHTML = "";
 document.getElementById("erro").innerHTML = "";
 
+// limpar resultado
+document.getElementById("resultado").innerHTML = "";
 document.getElementById("resultado").style.display = "none";
-document.getElementById("orcamento").style.display = "none";
 
+// reset global
 precoFinalGlobal = 0;
 
 }
