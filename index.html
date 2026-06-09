@@ -91,6 +91,14 @@ color:white;
 background:#734b2d;
 }
 
+.btn-futuro{
+background:#c7b8cf;
+cursor:pointer;
+
+.btn-futuro:hover{
+background:#b7a6c0;
+}
+  
 .btn-limpar{
 background:#B08A68;
 color:white;
@@ -176,8 +184,8 @@ margin-top:15px;
 🧹 Limpar
 </button>
 
-<button class="btn-orcamento" onclick="gerarOrcamento()">
-📄 Gerar Orçamento
+<button class="btn-orcamento" onclick="versaoFutura()" class="btn-futuro">
+📄 Gerar Orçamento (Versão 1.1)
 </button>
 
 <div id="erro" class="erro"></div>
@@ -312,10 +320,14 @@ precoAtacado.toFixed(2) +
 
 }
 
-function gerarOrcamento() {
+function versaoFutua() {
 
 if(precoFinalGlobal === 0){
-
+alert(
+"Esta funcionalidade fará parte da versão 1.1 do PrecificaCrochê."
+);
+}
+  
 document.getElementById("erro").innerHTML =
 "⚠️ Calcule primeiro o valor da peça.";
 
