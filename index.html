@@ -1,109 +1,407 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PrecificaCrochê</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f7f7f7;
-            display: flex;
-            justify-content: center;
-            padding: 30px;
-        }
-        .container {
-            background: white;
-            padding: 25px;
-            border-radius: 10px;
-            width: 100%;
-            max-width: 420px;
-            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
-        }
-        h1 {
-            text-align: center;
-            color: #6a1b9a;
-        }
-        label {
-            display: block;
-            margin-top: 15px;
-        }
-        input {
-            width: 100%;
-            padding: 10px;
-            margin: 5px 0 15px 0;
-            border-radius: 8px;
-            border: 1px solid #ddd;
-        }
-        button {
-            width: 100%;
-            padding: 12px;
-            background: #8e24aa;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-        button:hover {
-            background: #6a1b9a;
-        }
-        .resultado {
-            margin-top: 20px;
-            background: #f3e5f5;
-            padding: 15px;
-            border-radius: 10px;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Florar Crochês - Precificação</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+font-family:Arial,sans-serif;
+background:#F8F3EE;
+padding:20px;
+}
+
+.container{
+max-width:850px;
+margin:auto;
+background:#fff;
+padding:30px;
+border-radius:20px;
+box-shadow:0 5px 20px rgba(0,0,0,0.10);
+}
+
+.logo{
+text-align:center;
+margin-bottom:20px;
+}
+
+.logo h1{
+color:#8B5E3C;
+font-size:42px;
+}
+
+.logo p{
+color:#8B5E3C;
+font-size:18px;
+}
+
+h2{
+color:#8B5E3C;
+margin-top:20px;
+margin-bottom:10px;
+}
+
+label{
+display:block;
+margin-top:15px;
+font-weight:bold;
+color:#6b4c34;
+}
+
+input, textarea{
+width:100%;
+padding:12px;
+margin-top:5px;
+border:1px solid #d8d8d8;
+border-radius:10px;
+font-size:15px;
+}
+
+textarea{
+height:90px;
+resize:none;
+}
+
+button{
+width:100%;
+padding:14px;
+border:none;
+border-radius:10px;
+margin-top:10px;
+cursor:pointer;
+font-size:16px;
+font-weight:bold;
+}
+
+.btn-calcular{
+background:#8B5E3C;
+color:white;
+}
+
+.btn-calcular:hover{
+background:#734b2d;
+}
+
+.btn-limpar{
+background:#B08A68;
+color:white;
+}
+
+.btn-orcamento{
+background:#6b4c34;
+color:white;
+}
+
+.resultado{
+background:#F4ECE5;
+padding:20px;
+margin-top:20px;
+border-radius:15px;
+display:none;
+}
+
+.orcamento{
+background:#F4ECE5;
+padding:20px;
+margin-top:20px;
+border-radius:15px;
+display:none;
+}
+
+.erro{
+color:red;
+font-weight:bold;
+margin-top:15px;
+}
+
+</style>
 </head>
+
 <body>
-    <div class="container">
-        <h1>🧶 PrecificaCrochê</h1>
-        <label>Valor dos insumos (€)</label>
-        <input type="number" id="insumos" placeholder="Ex: 5 €">
-       
-        <label>Quantidade de rolos de linha</label>
-        <input type="number" id="quantidadeLinhas" placeholder="Ex: 2 rolos">
-       
-        <label>Valor total dos rolos de linha (€)</label>
-        <input type="number" id="valorLinhas" placeholder="Ex: 10 €">
-       
-        <label>Horas trabalhadas</label>
-        <input type="number" id="horas" placeholder="Ex: 3 horas">
-       
-        <label>Valor da hora (€)</label>
-        <input type="number" id="hora" placeholder="Ex: 8 €">
-       
-        <label>Lucro desejado (%)</label>
-        <input type="number" id="lucro" placeholder="Ex: 30%">
-       
-        <button onclick="calcular()">Calcular preço</button>
-       
-        <div class="resultado" id="resultado"></div>
-    </div>
-    <script>
-        function calcular() {
-            let insumos = parseFloat(document.getElementById('insumos').value) || 0;
-            let quantidadeLinhas = parseFloat(document.getElementById('quantidadeLinhas').value) || 0;
-            let valorLinhas = parseFloat(document.getElementById('valorLinhas').value) || 0;
-            let horas = parseFloat(document.getElementById('horas').value) || 0;
-            let hora = parseFloat(document.getElementById('hora').value) || 0;
-            let lucro = parseFloat(document.getElementById('lucro').value) || 0;
-           
-            let custoInsumos = insumos;
-            let custoLinhas = quantidadeLinhas * valorLinhas;
-            let maoDeObra = horas * hora;
-            let custoTotal = custoInsumos + custoLinhas + maoDeObra;
-            let valorLucro = custoTotal * (lucro / 100);
-            let precoFinal = custoTotal + valorLucro;
-           
-            document.getElementById('resultado').innerHTML =
-                "Custo de insumos: €" + custoInsumos.toFixed(2) + "<br>" +
-                "Custo das linhas: €" + custoLinhas.toFixed(2) + "<br>" +
-                "Mão de obra: €" + maoDeObra.toFixed(2) + "<br>" +
-                "Lucro: €" + valorLucro.toFixed(2) + "<br><br>" +
-                "<b>Preço final sugerido: €" + precoFinal.toFixed(2) + "</b>";
-        }
-    </script>
+
+<div class="container">
+
+<div class="logo">
+<h1>🌷 FLORAR CROCHÊS</h1>
+<p>Arte que floresce em cada ponto</p>
+</div>
+
+<h2>Dados da Peça</h2>
+
+<label>Nome da peça</label>
+<input type="text" id="nomePeca" placeholder="Ex: Bolsa Florença">
+
+<label>Descrição da peça</label>
+<textarea id="descricao" placeholder="Descreva sua peça"></textarea>
+
+<h2>Custos</h2>
+
+<label>Valor dos insumos (€)</label>
+<input type="number" id="insumos" step="0.01">
+
+<label>Quantidade de rolos utilizados</label>
+<input type="number" id="quantidadeLinhas" step="0.01">
+
+<label>Valor de cada rolo (€)</label>
+<input type="number" id="valorRolo" step="0.01">
+
+<label>Horas trabalhadas</label>
+<input type="number" id="horas" step="0.01">
+
+<label>Valor da hora (€)</label>
+<input type="number" id="valorHora" step="0.01">
+
+<h2>Venda</h2>
+
+<label>Lucro desejado (%)</label>
+<input type="number" id="lucro" step="0.01">
+
+<label>Desconto para atacado (%)</label>
+<input type="number" id="atacado" step="0.01">
+
+<button class="btn-calcular" onclick="calcular()">
+🧶 Calcular
+</button>
+
+<button class="btn-limpar" onclick="limparCampos()">
+🧹 Limpar
+</button>
+
+<button class="btn-orcamento" onclick="gerarOrcamento()">
+📄 Gerar Orçamento
+</button>
+
+<div id="erro" class="erro"></div>
+
+<div id="resultado" class="resultado"></div>
+
+<div id="orcamento" class="orcamento"></div>
+
+<script>
+
+let precoFinalGlobal = 0;
+
+function calcular() {
+
+let nomePeca = document.getElementById("nomePeca").value.trim();
+
+let insumos = parseFloat(document.getElementById("insumos").value);
+
+let quantidadeLinhas = parseFloat(document.getElementById("quantidadeLinhas").value);
+
+let valorRolo = parseFloat(document.getElementById("valorRolo").value);
+
+let horas = parseFloat(document.getElementById("horas").value);
+
+let valorHora = parseFloat(document.getElementById("valorHora").value);
+
+let lucro = parseFloat(document.getElementById("lucro").value);
+
+let atacado = parseFloat(document.getElementById("atacado").value);
+
+document.getElementById("erro").innerHTML = "";
+
+if (
+nomePeca === "" ||
+isNaN(insumos) ||
+isNaN(quantidadeLinhas) ||
+isNaN(valorRolo) ||
+isNaN(horas) ||
+isNaN(valorHora) ||
+isNaN(lucro)
+) {
+
+document.getElementById("erro").innerHTML =
+"⚠️ Preencha todos os campos obrigatórios.";
+
+return;
+
+}
+
+if (
+insumos < 0 ||
+quantidadeLinhas < 0 ||
+valorRolo < 0 ||
+horas < 0 ||
+valorHora < 0 ||
+lucro < 0
+) {
+
+document.getElementById("erro").innerHTML =
+"⚠️ Os valores devem ser maiores que zero.";
+
+return;
+
+}
+
+if (isNaN(atacado)) {
+atacado = 0;
+}
+
+let custoLinhas = quantidadeLinhas * valorRolo;
+
+let maoDeObra = horas * valorHora;
+
+let custoTotal =
+insumos +
+custoLinhas +
+maoDeObra;
+
+let valorLucro =
+custoTotal * (lucro / 100);
+
+let precoFinal =
+custoTotal + valorLucro;
+
+let precoAtacado =
+precoFinal -
+(precoFinal * (atacado / 100));
+
+precoFinalGlobal = precoFinal;
+
+document.getElementById("resultado").style.display = "block";
+
+document.getElementById("resultado").innerHTML =
+
+"<h2>📊 Resultado Interno</h2>" +
+
+"<p><strong>Peça:</strong> " +
+nomePeca +
+"</p>" +
+
+"<hr><br>" +
+
+"<p>💎 Insumos: € " +
+insumos.toFixed(2) +
+"</p>" +
+
+"<p>🧶 Linhas: € " +
+custoLinhas.toFixed(2) +
+"</p>" +
+
+"<p>⏰ Mão de obra: € " +
+maoDeObra.toFixed(2) +
+"</p>" +
+
+"<p>📦 Custo Total: € " +
+custoTotal.toFixed(2) +
+"</p>" +
+
+"<p>📈 Lucro: € " +
+valorLucro.toFixed(2) +
+"</p>" +
+
+"<br>" +
+
+"<h3>💰 Preço Varejo: € " +
+precoFinal.toFixed(2) +
+"</h3>" +
+
+"<h3>🏷️ Preço Atacado: € " +
+precoAtacado.toFixed(2) +
+"</h3>";
+
+}
+
+function gerarOrcamento() {
+
+if(precoFinalGlobal === 0){
+
+document.getElementById("erro").innerHTML =
+"⚠️ Calcule primeiro o valor da peça.";
+
+return;
+
+}
+
+let nomePeca =
+document.getElementById("nomePeca").value;
+
+let descricao =
+document.getElementById("descricao").value;
+
+document.getElementById("orcamento").style.display = "block";
+
+document.getElementById("orcamento").innerHTML =
+
+"<h2>🌷 FLORAR CROCHÊS</h2>" +
+
+"<p><em>Arte que floresce em cada ponto</em></p>" +
+
+"<hr><br>" +
+
+"<h3>ORÇAMENTO</h3>" +
+
+"<p><strong>Peça:</strong> " +
+nomePeca +
+"</p>" +
+
+"<br>" +
+
+"<p><strong>Descrição:</strong></p>" +
+
+"<p>" +
+descricao +
+"</p>" +
+
+"<br>" +
+
+"<h2>💰 Valor: € " +
+precoFinalGlobal.toFixed(2) +
+"</h2>" +
+
+"<br>" +
+
+"<p>📅 Prazo estimado: 7 dias úteis</p>" +
+
+"<p>📌 Validade do orçamento: 15 dias</p>";
+
+}
+
+function limparCampos() {
+
+document.getElementById("nomePeca").value = "";
+
+document.getElementById("descricao").value = "";
+
+document.getElementById("insumos").value = "";
+
+document.getElementById("quantidadeLinhas").value = "";
+
+document.getElementById("valorRolo").value = "";
+
+document.getElementById("horas").value = "";
+
+document.getElementById("valorHora").value = "";
+
+document.getElementById("lucro").value = "";
+
+document.getElementById("atacado").value = "";
+
+document.getElementById("resultado").innerHTML = "";
+
+document.getElementById("orcamento").innerHTML = "";
+
+document.getElementById("erro").innerHTML = "";
+
+document.getElementById("resultado").style.display = "none";
+
+document.getElementById("orcamento").style.display = "none";
+
+precoFinalGlobal = 0;
+
+}
+
+</script>
+
 </body>
 </html>
