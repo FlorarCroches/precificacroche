@@ -177,13 +177,8 @@ margin-top:15px;
 <label>Desconto para atacado (%)</label>
 <input type="number" id="atacado" step="0.01">
 
-<button class="btn-calcular" onclick="calcular()">
-🧶 Calcular
-</button>
-
-<button class="btn-limpar" onclick="limparCampos()">
-🧹 Limpar
-</button>
+<button onclick="calcular()">🧶 Calcular</button>
+<button onclick="limparCampos()">🧹 Limpar</button>
 
 <button class="btn-orcamento btn-futuro" onclick="versaoFutura()">
 📄 Gerar Orçamento (Versão 1.1)
@@ -197,10 +192,14 @@ margin-top:15px;
 
 <script>
 
-let precoFinalGlobal = 0;
-
 function calcular() {
+alert("CALCULAR FUNCIONA");
+}
+function limparCampos() {
+alert("LIMPAR FUNCIONA");
+}
 
+let precoFinalGlobal = 0;
 let nomePeca = document.getElementById("nomePeca").value.trim();
 let insumos = parseFloat(document.getElementById("insumos").value);
 let quantidadeLinhas = parseFloat(document.getElementById("quantidadeLinhas").value);
