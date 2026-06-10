@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="pt">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Florar Crochês - Precificação</title>
+<title>Florar Crochês - PrecificaCrochê</title>
 
 <style>
 
@@ -15,18 +16,19 @@ box-sizing:border-box;
 }
 
 body{
-font-family:Arial,sans-serif;
+font-family:Arial, sans-serif;
 background:#F8F3EE;
 padding:20px;
+color:#5A4635;
 }
 
 .container{
-max-width:850px;
+max-width:900px;
 margin:auto;
-background:#fff;
+background:white;
 padding:30px;
 border-radius:20px;
-box-shadow:0 5px 20px rgba(0,0,0,0.10);
+box-shadow:0 8px 25px rgba(0,0,0,0.10);
 }
 
 .logo{
@@ -35,51 +37,79 @@ margin-bottom:20px;
 }
 
 .logo h1{
-color:#8B5E3C;
 font-size:42px;
+color:#8B5E3C;
+margin-bottom:10px;
 }
 
-.logo p{
+.slogan{
+font-size:16px;
+color:#A67C52;
+font-style:italic;
+}
+
+.introducao{
+background:#F4ECE5;
+padding:15px;
+border-radius:12px;
+margin-bottom:25px;
+}
+
+.introducao h2{
 color:#8B5E3C;
-font-size:18px;
+margin-bottom:10px;
+}
+
+.introducao p{
+line-height:1.5;
 }
 
 h2{
-color:#8B5E3C;
 margin-top:20px;
 margin-bottom:10px;
+color:#8B5E3C;
 }
 
 label{
 display:block;
 margin-top:15px;
 font-weight:bold;
-color:#6b4c34;
 }
 
-input, textarea{
+input,
+textarea,
+select{
 width:100%;
 padding:12px;
 margin-top:5px;
-border:1px solid #d8d8d8;
+border:1px solid #DDD;
 border-radius:10px;
 font-size:15px;
 }
 
+input:focus,
+textarea:focus,
+select:focus{
+outline:none;
+border-color:#8B5E3C;
+box-shadow:0 0 5px rgba(139,94,60,0.3);
+}
+
 textarea{
-height:90px;
-resize:none;
+height:100px;
+resize:vertical;
 }
 
 button{
 width:100%;
 padding:14px;
+margin-top:12px;
 border:none;
 border-radius:10px;
-margin-top:10px;
-cursor:pointer;
 font-size:16px;
 font-weight:bold;
+cursor:pointer;
+transition:0.3s;
 }
 
 .btn-calcular{
@@ -88,51 +118,84 @@ color:white;
 }
 
 .btn-calcular:hover{
-background:#734b2d;
+background:#73482A;
 }
 
-.btn-futuro{
-background:#c7b8cf;
-cursor:pointer;
-}
-
-.btn-futuro:hover{
-background:#b7a6c0;
-}
-  
 .btn-limpar{
-background:#B08A68;
+background:#C9B29B;
 color:white;
 }
 
-.btn-orcamento{
-background:#6b4c34;
-color:white;
+.btn-limpar:hover{
+background:#B89A7B;
+}
+
+.btn-versao{
+background:#D8D0C8;
+color:#6B4C34;
+}
+
+.btn-versao:hover{
+background:#C8BDB3;
+}
+
+.alerta{
+display:none;
+margin-top:20px;
+padding:15px;
+background:#FFF3CD;
+border:1px solid #FFE69C;
+border-radius:10px;
+color:#856404;
+font-weight:bold;
 }
 
 .resultado{
-background:#F4ECE5;
-padding:20px;
-margin-top:20px;
-border-radius:15px;
 display:none;
+margin-top:20px;
+padding:20px;
+background:#F4ECE5;
+border-radius:15px;
+line-height:1.8;
 }
 
-.orcamento{
-background:#F4ECE5;
-padding:20px;
-margin-top:20px;
-border-radius:15px;
-display:none;
+.resultado h3{
+color:#8B5E3C;
+margin-bottom:10px;
 }
 
-.erro{
-color:red;
-font-weight:bold;
-margin-top:15px;
+footer{
+margin-top:30px;
+text-align:center;
+color:#8B5E3C;
 }
+
+footer hr{
+margin-bottom:15px;
+border:none;
+height:1px;
+background:#DDD;
+}
+
+@media(max-width:768px){
+
+.container{
+padding:20px;
+}
+
+.logo h1{
+font-size:32px;
+}
+
+button{
+font-size:15px;
+}
+
+}
+
 
 </style>
+
 </head>
 
 <body>
@@ -140,180 +203,325 @@ margin-top:15px;
 <div class="container">
 
 <div class="logo">
+
 <h1>🌷 FLORAR CROCHÊS</h1>
-<p>Arte que floresce em cada ponto</p>
+
+<p class="slogan">
+Arte que floresce em cada ponto
+</p>
+
 </div>
+
+<div class="introducao">
+
+<h2>PrecificaCrochê</h2>
+
+<p>
+Ferramenta desenvolvida para auxiliar artesãs na definição de preços justos e sustentáveis para seus produtos.
+</p>
+
+</div>
+
+<label>Moeda</label>
+
+<select id="moeda">
+
+<option value="€">Euro (€)</option>
+
+<option value="R$">Real (R$)</option>
+
+</select>
 
 <h2>Dados da Peça</h2>
 
 <label>Nome da peça</label>
-<input type="text" id="nomePeca" placeholder="Ex: Bolsa Florença">
+
+<input
+type="text"
+id="nomePeca"
+placeholder="Ex: Bolsa Florença">
 
 <label>Descrição da peça</label>
-<textarea id="descricao" placeholder="Descreva sua peça"></textarea>
+
+<textarea
+id="descricao"
+placeholder="Descreva sua peça">
+</textarea>
 
 <h2>Custos</h2>
 
-<label>Valor dos insumos (€)</label>
-<input type="number" id="insumos" step="0.01">
+<label>Valor dos insumos</label>
+
+<input
+type="number"
+step="0.01"
+id="insumos"
+placeholder="Ex: 12">
 
 <label>Quantidade de rolos utilizados</label>
-<input type="number" id="quantidadeLinhas" step="0.01">
 
-<label>Valor de cada rolo (€)</label>
-<input type="number" id="valorRolo" step="0.01">
+<input
+type="number"
+step="0.01"
+id="qtdRolos"
+placeholder="Ex: 1.5">
+
+<label>Valor de cada rolo</label>
+
+<input
+type="number"
+step="0.01"
+id="valorRolo"
+placeholder="Ex: 6.50">
 
 <label>Horas trabalhadas</label>
-<input type="number" id="horas" step="0.01">
 
-<label>Valor da hora (€)</label>
-<input type="number" id="valorHora" step="0.01">
+<input
+type="number"
+step="0.01"
+id="horas"
+placeholder="Ex: 5">
+
+<label>Valor da hora</label>
+
+<input
+type="number"
+step="0.01"
+id="valorHora"
+placeholder="Ex: 8">
 
 <h2>Venda</h2>
 
 <label>Lucro desejado (%)</label>
-<input type="number" id="lucro" step="0.01">
+
+<input
+type="number"
+step="0.01"
+id="lucro"
+placeholder="Ex: 30">
 
 <label>Desconto para atacado (%)</label>
-<input type="number" id="atacado" step="0.01">
 
-<button onclick="calcular()">🧶 Calcular</button>
-<button onclick="limparCampos()">🧹 Limpar</button>
+<input
+type="number"
+step="0.01"
+id="atacado"
+placeholder="Opcional">
 
-<button class="btn-orcamento btn-futuro" onclick="versaoFutura()">
-📄 Gerar Orçamento (Versão 1.1)
+<button
+class="btn-calcular"
+onclick="calcular()">
+
+🧮 Calcular
+
 </button>
 
-<div id="erro" class="erro"></div>
+<button
+class="btn-limpar"
+onclick="limparCampos()">
+
+🧹 Limpar Campos
+
+</button>
+
+<button
+class="btn-versao"
+onclick="versaoFutura()">
+
+📄 Gerar Orçamento
+(Versão 1.1)
+
+</button>
+
+<div id="alerta" class="alerta"></div>
 
 <div id="resultado" class="resultado"></div>
 
-<div id="orcamento" class="orcamento"></div>
+<footer>
+
+<hr>
+
+<p>
+Desenvolvido por Florar Crochês
+</p>
+
+<p>
+Arte que floresce em cada ponto
+</p>
+
+</footer>
+
+</div>
 
 <script>
 
 function calcular() {
-alert("CALCULAR FUNCIONA");
-}
-function limparCampos() {
-alert("LIMPAR FUNCIONA");
-}
 
-let precoFinalGlobal = 0;
-let nomePeca = document.getElementById("nomePeca").value.trim();
-let insumos = parseFloat(document.getElementById("insumos").value);
-let quantidadeLinhas = parseFloat(document.getElementById("quantidadeLinhas").value);
-let valorRolo = parseFloat(document.getElementById("valorRolo").value);
-let horas = parseFloat(document.getElementById("horas").value);
-let valorHora = parseFloat(document.getElementById("valorHora").value);
-let lucro = parseFloat(document.getElementById("lucro").value);
-let atacado = parseFloat(document.getElementById("atacado").value);
+let moeda =
+document.getElementById("moeda").value;
 
-document.getElementById("erro").innerHTML = "";
+let nomePeca =
+document.getElementById("nomePeca").value.trim();
 
-// validação
-if (
-nomePeca === "" ||
-isNaN(insumos) ||
-isNaN(quantidadeLinhas) ||
-isNaN(valorRolo) ||
-isNaN(horas) ||
-isNaN(valorHora) ||
-isNaN(lucro)
-) {
-document.getElementById("erro").innerHTML =
-"⚠️ Preencha todos os campos obrigatórios.";
+let insumos =
+parseFloat(document.getElementById("insumos").value) || 0;
+
+let qtdRolos =
+parseFloat(document.getElementById("qtdRolos").value) || 0;
+
+let valorRolo =
+parseFloat(document.getElementById("valorRolo").value) || 0;
+
+let horas =
+parseFloat(document.getElementById("horas").value) || 0;
+
+let valorHora =
+parseFloat(document.getElementById("valorHora").value) || 0;
+
+let lucro =
+parseFloat(document.getElementById("lucro").value) || 0;
+
+let atacado =
+parseFloat(document.getElementById("atacado").value) || 0;
+
+if(nomePeca === ""){
+
+alert("Informe o nome da peça.");
+
 return;
+
 }
 
-if (
-insumos < 0 ||
-quantidadeLinhas < 0 ||
-valorRolo < 0 ||
-horas < 0 ||
-valorHora < 0 ||
-lucro < 0
-) {
-document.getElementById("erro").innerHTML =
-"⚠️ Os valores devem ser maiores que zero.";
-return;
+let custoLinhas =
+qtdRolos * valorRolo;
+
+let maoDeObra =
+horas * valorHora;
+
+let custoTotal =
+insumos +
+custoLinhas +
+maoDeObra;
+
+let valorLucro =
+custoTotal * (lucro / 100);
+
+let precoVarejo =
+custoTotal + valorLucro;
+
+let precoAtacado =
+precoVarejo -
+(precoVarejo * (atacado / 100));
+
+let alerta =
+document.getElementById("alerta");
+
+if(lucro < 20){
+
+alerta.style.display = "block";
+
+alerta.innerHTML =
+
+"⚠️ Atenção: margens abaixo de 20% podem reduzir sua rentabilidade.";
+
+}else{
+
+alerta.style.display = "none";
+
 }
 
-if (atacado === "" || isNaN(atacado)) {
-atacado = 0;
+document.getElementById("resultado").style.display = "block";
+
+document.getElementById("resultado").innerHTML =
+
+"<h3>📊 Resultado Interno</h3>" +
+
+"<p><strong>Peça:</strong> " +
+nomePeca +
+"</p><hr><br>" +
+
+"<p>💎 Insumos: " +
+moeda +
+" " +
+insumos.toFixed(2) +
+"</p>" +
+
+"<p>🧶 Linhas: " +
+moeda +
+" " +
+custoLinhas.toFixed(2) +
+"</p>" +
+
+"<p>⏰ Mão de obra: " +
+moeda +
+" " +
+maoDeObra.toFixed(2) +
+"</p>" +
+
+"<p>📦 Custo Total: " +
+moeda +
+" " +
+custoTotal.toFixed(2) +
+"</p>" +
+
+"<p>📈 Lucro: " +
+moeda +
+" " +
+valorLucro.toFixed(2) +
+"</p>" +
+
+"<br>" +
+
+"<h3>💰 Preço Varejo: " +
+moeda +
+" " +
+precoVarejo.toFixed(2) +
+"</h3>" +
+
+"<h3>🏷️ Preço Atacado: " +
+moeda +
+" " +
+precoAtacado.toFixed(2) +
+"</h3>";
+
 }
 
-// cálculos
-let custoLinhas = quantidadeLinhas * valorRolo;
-let maoDeObra = horas * valorHora;
-let custoTotal = insumos + custoLinhas + maoDeObra;
-let valorLucro = custoTotal * (lucro / 100);
-let precoFinal = custoTotal + valorLucro;
-let precoAtacado = precoFinal - (precoFinal * (atacado / 100));
+function limparCampos(){
 
-precoFinalGlobal = precoFinal;
+document.getElementById("nomePeca").value = "";
 
-// 🔥 MOSTRAR LOGO ABAIXO DO BOTÃO
-const resultado = document.getElementById("resultado");
-resultado.style.display = "block";
+document.getElementById("descricao").value = "";
 
-resultado.innerHTML = `
-<h2>📊 Resultado da Precificação</h2>
+document.getElementById("insumos").value = "";
 
-<p><strong>Peça:</strong> ${nomePeca}</p>
-<hr>
+document.getElementById("qtdRolos").value = "";
 
-<p>💎 Insumos: € ${insumos.toFixed(2)}</p>
-<p>🧶 Linhas: € ${custoLinhas.toFixed(2)}</p>
-<p>⏰ Mão de obra: € ${maoDeObra.toFixed(2)}</p>
+document.getElementById("valorRolo").value = "";
 
-<p><strong>Custo total:</strong> € ${custoTotal.toFixed(2)}</p>
-<p><strong>Lucro:</strong> € ${valorLucro.toFixed(2)}</p>
+document.getElementById("horas").value = "";
 
-<hr>
+document.getElementById("valorHora").value = "";
 
-<h3>💰 Preço final: € ${precoFinal.toFixed(2)}</h3>
-<h3>🏷️ Atacado: € ${precoAtacado.toFixed(2)}</h3>
-`;
+document.getElementById("lucro").value = "";
+
+document.getElementById("atacado").value = "";
+
+document.getElementById("resultado").innerHTML = "";
+
+document.getElementById("resultado").style.display = "none";
+
+document.getElementById("alerta").style.display = "none";
+
 }
 
-function versaoFutura() {
+function versaoFutura(){
 
 alert(
-"📄 A geração de orçamento será disponibilizada na versão 1.1 do PrecificaCrochê."
+"📄 Esta funcionalidade fará parte da versão 1.1 do PrecificaCrochê."
 );
 
 }
-  
-document.getElementById("erro").innerHTML =
-"⚠️ Calcule primeiro o valor da peça.";
 
-return;
-
-}
-
-function limparCampos() {
-
-document.getElementById("nomePeca").value = "";
-document.getElementById("descricao").value = "";
-document.getElementById("insumos").value = "";
-document.getElementById("quantidadeLinhas").value = "";
-document.getElementById("valorRolo").value = "";
-document.getElementById("horas").value = "";
-document.getElementById("valorHora").value = "";
-document.getElementById("lucro").value = "";
-document.getElementById("atacado").value = "";
-
-document.getElementById("erro").innerHTML = "";
-
-// limpar resultado
-document.getElementById("resultado").innerHTML = "";
-document.getElementById("resultado").style.display = "none";
-
-// reset global
-precoFinalGlobal = 0;
-
-}
 </script>
 
 </body>
