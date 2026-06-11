@@ -31,19 +31,20 @@ border-radius:20px;
 box-shadow:0 8px 25px rgba(0,0,0,0.10);
 }
 
+/* LOGO */
 .logo{
 text-align:center;
 margin-bottom:20px;
 }
 
 .logo-img{
-max-width:180px;
-width:auto;
+max-width:160px;
+width:100%;
 height:auto;
 display:block;
 margin:0 auto 15px auto;
-}  
-  
+}
+
 .logo h1{
 font-size:42px;
 color:#8B5E3C;
@@ -56,6 +57,7 @@ color:#A67C52;
 font-style:italic;
 }
 
+/* INTRODUÇÃO */
 .introducao{
 background:#F4ECE5;
 padding:15px;
@@ -120,6 +122,7 @@ cursor:pointer;
 transition:0.3s;
 }
 
+/* BOTÕES */
 .btn-calcular{
 background:#8B5E3C;
 color:white;
@@ -147,6 +150,7 @@ color:#6B4C34;
 background:#C8BDB3;
 }
 
+/* ALERTAS */
 .alerta{
 display:none;
 margin-top:20px;
@@ -172,6 +176,7 @@ color:#8B5E3C;
 margin-bottom:10px;
 }
 
+/* FOOTER */
 footer{
 margin-top:30px;
 text-align:center;
@@ -185,20 +190,7 @@ height:1px;
 background:#DDD;
 }
 
-@media(max-width:768px){
-
-.container{
-padding:20px;
-}
-
-.logo h1{
-font-size:32px;
-}
-
-button{
-font-size:15px;
-}
-
+/* PREÇO FINAL */
 .preco-final{
 background:#8B5E3C;
 color:white;
@@ -220,6 +212,7 @@ margin:0;
 font-size:18px;
 }
 
+/* DICAS */
 .dicas{
 margin-top:25px;
 padding:18px;
@@ -233,6 +226,7 @@ margin-bottom:10px;
 color:#8B5E3C;
 }
 
+/* ERRO */
 .erro{
 background:#FDECEC;
 border:1px solid #F5C2C2;
@@ -243,26 +237,42 @@ margin-top:15px;
 font-weight:bold;
 }
 
+/* MOBILE */
+@media(max-width:768px){
+
+.container{
+padding:20px;
+}
+
+.logo h1{
+font-size:32px;
+}
+
+.logo-img{
+max-width:130px;
+width:100%;
+height:auto;
+display:block;
+margin:0 auto 15px auto;
+}
+
+button{
+font-size:15px;
+}
+
 .resultado hr{
 margin:15px 0;
 border:none;
 height:1px;
 background:#d9cfc5;
-}  
+}
+
 .titulo-app{
 color:#8B5E3C;
 font-size:30px;
 margin-top:10px;
 margin-bottom:5px;
 text-align:center;
-}
-
-.logo-img{
-max-width:140px;
-width:100%;
-height:auto;
-display:block;
-margin:0 auto 15px auto;
 }
 }
 
