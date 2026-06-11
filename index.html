@@ -191,6 +191,63 @@ button{
 font-size:15px;
 }
 
+.logo-img{
+max-width:280px;
+width:100%;
+display:block;
+margin:0 auto 15px auto;
+}
+
+.preco-final{
+background:#8B5E3C;
+color:white;
+padding:20px;
+border-radius:15px;
+text-align:center;
+margin-top:20px;
+box-shadow:0 4px 12px rgba(0,0,0,0.15);
+}
+
+.preco-final h2{
+margin-top:10px;
+font-size:36px;
+color:white;
+}
+
+.preco-final p{
+margin:0;
+font-size:18px;
+}
+
+.dicas{
+margin-top:25px;
+padding:18px;
+background:#FFF8F1;
+border-left:5px solid #8B5E3C;
+border-radius:10px;
+}
+
+.dicas h3{
+margin-bottom:10px;
+color:#8B5E3C;
+}
+
+.erro{
+background:#FDECEC;
+border:1px solid #F5C2C2;
+color:#A94442;
+padding:12px;
+border-radius:10px;
+margin-top:15px;
+font-weight:bold;
+}
+
+.resultado hr{
+margin:15px 0;
+border:none;
+height:1px;
+background:#d9cfc5;
+}  
 }
 
 
@@ -328,7 +385,7 @@ onclick="limparCampos()">
 class="btn-versao"
 onclick="versaoFutura()">
 
-📄 Gerar Orçamento
+📄 Gerar Orçamento Profissional
 (Versão 1.1)
 
 </button>
@@ -337,6 +394,17 @@ onclick="versaoFutura()">
 
 <div id="resultado" class="resultado"></div>
 
+<div class="dicas">
+
+<h3>🌷 Dica da Florar</h3>
+
+<p>
+Nunca venda apenas pelo custo do material.
+Seu tempo, sua técnica e sua experiência também têm valor.
+</p>
+
+</div>
+  
 <footer>
 
 <hr>
@@ -355,7 +423,7 @@ Arte que floresce em cada ponto
 
 <script>
 
-function calcular() {
+function calcular(){
 
 let moeda =
 document.getElementById("moeda").value;
@@ -363,33 +431,45 @@ document.getElementById("moeda").value;
 let nomePeca =
 document.getElementById("nomePeca").value.trim();
 
+let descricao =
+document.getElementById("descricao").value.trim();
+
 let insumos =
-parseFloat(document.getElementById("insumos").value) || 0;
+parseFloat(document.getElementById("insumos").value);
 
 let qtdRolos =
-parseFloat(document.getElementById("qtdRolos").value) || 0;
+parseFloat(document.getElementById("qtdRolos").value);
 
 let valorRolo =
-parseFloat(document.getElementById("valorRolo").value) || 0;
+parseFloat(document.getElementById("valorRolo").value);
 
 let horas =
-parseFloat(document.getElementById("horas").value) || 0;
+parseFloat(document.getElementById("horas").value);
 
 let valorHora =
-parseFloat(document.getElementById("valorHora").value) || 0;
+parseFloat(document.getElementById("valorHora").value);
 
 let lucro =
-parseFloat(document.getElementById("lucro").value) || 0;
+parseFloat(document.getElementById("lucro").value);
 
 let atacado =
 parseFloat(document.getElementById("atacado").value) || 0;
 
-if(nomePeca === ""){
-
+if(!nomePeca){
 alert("Informe o nome da peça.");
+return;
+}
+
+if(isNaN(insumos) ||
+isNaN(qtdRolos) ||
+isNaN(valorRolo) ||
+isNaN(horas) ||
+isNaN(valorHora) ||
+isNaN(lucro)){
+
+alert("Preencha todos os campos obrigatórios.");
 
 return;
-
 }
 
 let custoLinhas =
@@ -404,41 +484,56 @@ custoLinhas +
 maoDeObra;
 
 let valorLucro =
-custoTotal * (lucro / 100);
+custoTotal * (lucro/100);
 
 let precoVarejo =
 custoTotal + valorLucro;
 
 let precoAtacado =
 precoVarejo -
-(precoVarejo * (atacado / 100));
+(precoVarejo * atacado/100);
 
 let alerta =
 document.getElementById("alerta");
 
 if(lucro < 20){
 
-alerta.style.display = "block";
+alerta.style.display="block";
 
-alerta.innerHTML =
-
-"⚠️ Atenção: margens abaixo de 20% podem reduzir sua rentabilidade.";
+alerta.innerHTML=
+"⚠️ Atenção: lucro abaixo de 20% pode reduzir sua rentabilidade.";
 
 }else{
 
-alerta.style.display = "none";
+alerta.style.display="none";
 
 }
 
-document.getElementById("resultado").style.display = "block";
+document.getElementById("resultado").style.display="block";
 
-document.getElementById("resultado").innerHTML =
+document.getElementById("resultado").innerHTML=
+
+"<div class='preco-final'>" +
+
+"<p>Preço sugerido para venda</p>" +
+
+"<h2>" +
+moeda +
+" " +
+precoVarejo.toFixed(2) +
+"</h2>" +
+
+"</div>" +
+
+"<br>" +
 
 "<h3>📊 Resultado Interno</h3>" +
 
+"<hr>" +
+
 "<p><strong>Peça:</strong> " +
 nomePeca +
-"</p><hr><br>" +
+"</p>" +
 
 "<p>💎 Insumos: " +
 moeda +
@@ -470,19 +565,31 @@ moeda +
 valorLucro.toFixed(2) +
 "</p>" +
 
+"<p>📊 Margem aplicada: " +
+lucro.toFixed(0) +
+"%</p>" +
+
 "<br>" +
 
-"<h3>💰 Preço Varejo: " +
-moeda +
-" " +
-precoVarejo.toFixed(2) +
-"</h3>" +
+"<h3>🏷️ Preço Atacado</h3>" +
 
-"<h3>🏷️ Preço Atacado: " +
+"<p>" +
 moeda +
 " " +
 precoAtacado.toFixed(2) +
-"</h3>";
+"</p>" +
+
+"<br>" +
+
+"<h3>📝 Descrição sugerida</h3>" +
+
+"<p>" +
+
+nomePeca +
+
+" produzida artesanalmente em crochê, confeccionada com materiais selecionados e acabamento manual. Produto exclusivo desenvolvido com atenção aos detalhes e alta qualidade artesanal." +
+
+"</p>";
 
 }
 
